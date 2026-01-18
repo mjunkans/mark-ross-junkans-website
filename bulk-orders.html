@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church & Group Orders – Mark Ross Junkans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a5f;
+            --primary-hover: #2d4a6f;
+            --text-dark: #333333;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --bg-white: #ffffff;
+            --bg-light: #f5f5f5;
+            --accent-line: #c4a24d;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px 0;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .site-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            letter-spacing: 0.02em;
+            margin-bottom: 30px;
+        }
+
+        .site-title a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            text-align: center;
+            padding: 80px 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .page-hero .subtitle {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            color: var(--text-medium);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Book Preview */
+        .book-preview {
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .book-preview img {
+            width: 200px;
+            height: auto;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 60px 40px;
+            background-color: var(--bg-light);
+        }
+
+        .pricing-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px 30px;
+            width: 340px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 20px;
+        }
+
+        .pricing-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .quantity {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .discount {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .pricing-card .discount-label {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-bottom: 25px;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-card li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Use Cases Section */
+        .use-cases {
+            padding: 80px 40px;
+        }
+
+        .use-cases h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+        }
+
+        .use-cases-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .use-case {
+            text-align: center;
+            width: 200px;
+        }
+
+        .use-case-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .use-case h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .use-case p {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        /* Contact Form Section */
+        .contact-section {
+            padding: 80px 40px;
+            background-color: var(--bg-light);
+        }
+
+        .contact-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .contact-section > p {
+            text-align: center;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Bookstore Note */
+        .bookstore-note {
+            text-align: center;
+            padding: 60px 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .bookstore-note p {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+
+        .bookstore-note .isbn {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer nav ul {
+            margin-bottom: 25px;
+        }
+
+        footer nav a {
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        footer nav a:hover {
+            color: var(--accent-line);
+        }
+
+        .footer-links {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links span {
+            margin: 0 10px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 25px;
+            }
+
+            .page-hero {
+                padding: 60px 20px 40px;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .pricing-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .pricing-section {
+                padding: 50px 20px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .use-case {
+                width: 45%;
+            }
+
+            .use-cases {
+                padding: 60px 20px;
+            }
+
+            .contact-section {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 25px 15px 0;
+            }
+
+            .site-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            .site-title a {
+                text-decoration: none;
+            }
+
+            nav {
+                padding: 15px 0;
+            }
+
+            nav ul {
+                gap: 8px 15px;
+                padding: 0 10px;
+            }
+
+            nav a {
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+            }
+
+            .page-hero {
+                padding: 40px 15px 30px;
+            }
+
+            .page-hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .page-hero p {
+                font-size: 0.95rem;
+            }
+
+            .book-preview {
+                padding: 30px 15px;
+            }
+
+            .book-preview img {
+                width: 160px;
+            }
+
+            .pricing-section {
+                padding: 40px 15px;
+            }
+
+            .pricing-section h2 {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+
+            .pricing-grid {
+                gap: 25px;
+            }
+
+            .pricing-card {
+                padding: 30px 20px;
+            }
+
+            .pricing-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .pricing-card .discount {
+                font-size: 2rem;
+            }
+
+            .pricing-card li {
+                font-size: 0.9rem;
+                padding: 8px 0;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.8rem;
+            }
+
+            .use-cases {
+                padding: 50px 15px;
+            }
+
+            .use-cases h2 {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+
+            .use-cases-grid {
+                gap: 25px;
+            }
+
+            .use-case {
+                width: 100%;
+            }
+
+            .use-case-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .use-case h3 {
+                font-size: 1rem;
+            }
+
+            .use-case p {
+                font-size: 0.85rem;
+            }
+
+            .contact-section {
+                padding: 50px 15px;
+            }
+
+            .contact-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .contact-section > p {
+                font-size: 0.9rem;
+                margin-bottom: 30px;
+            }
+
+            .contact-form {
+                padding: 25px 15px;
+            }
+
+            .form-group label {
+                font-size: 0.85rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+
+            .bookstore-note {
+                padding: 40px 15px;
+            }
+
+            .bookstore-note p {
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 30px 15px;
+            }
+
+            footer nav ul {
+                gap: 8px 15px;
+                margin-bottom: 20px;
+            }
+
+            footer nav a {
+                font-size: 0.75rem;
+            }
+
+            .footer-links {
+                font-size: 0.75rem;
+            }
+
+            .footer-links span {
+                margin: 0 5px;
+            }
+
+            .copyright {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .site-title {
+                font-size: 1.4rem;
+            }
+
+            nav ul {
+                gap: 6px 12px;
+            }
+
+            nav a {
+                font-size: 0.65rem;
+            }
+
+            .page-hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .pricing-card .discount {
+                font-size: 1.8rem;
+            }
+
+            .popular-badge {
+                font-size: 0.65rem;
+                padding: 4px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Mark Ross Junkans</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Church & Group Orders</h1>
+        <p class="subtitle">Equip your congregation to navigate faith in an age of AI</p>
+        <p>Whether you're leading a small group study, launching a sermon series, or equipping your entire congregation, bulk orders make it easy and affordable to put this timely resource in everyone's hands.</p>
+    </section>
+
+    <!-- Book Preview -->
+    <div class="book-preview">
+        <img src="Images/Cover Return of Mystery Kindle New.jpg" alt="The Return of Mystery: Faith In An Age of Machines">
+    </div>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <h2>Bulk Pricing</h2>
+        <div class="pricing-grid">
+            <!-- Small Group -->
+            <div class="pricing-card">
+                <h3>Small Group</h3>
+                <p class="quantity">10-24 copies</p>
+                <p class="discount">20% off</p>
+                <p class="discount-label">retail price</p>
+                <ul>
+                    <li>Free shipping</li>
+                    <li>Discussion questions included</li>
+                </ul>
+                <a href="#contact-form" class="btn btn-outline">Get Started</a>
+            </div>
+
+            <!-- Leadership Team -->
+            <div class="pricing-card popular">
+                <span class="popular-badge">Most Popular</span>
+                <h3>Leadership Team</h3>
+                <p class="quantity">25-49 copies</p>
+                <p class="discount">30% off</p>
+                <p class="discount-label">retail price</p>
+                <ul>
+                    <li>Free shipping</li>
+                    <li>Discussion questions included</li>
+                    <li>Virtual author Q&A session</li>
+                </ul>
+                <a href="#contact-form" class="btn">Get Started</a>
+            </div>
+
+            <!-- Congregation -->
+            <div class="pricing-card">
+                <h3>Congregation</h3>
+                <p class="quantity">50+ copies</p>
+                <p class="discount">40% off</p>
+                <p class="discount-label">retail price</p>
+                <ul>
+                    <li>Free shipping</li>
+                    <li>Discussion questions included</li>
+                    <li>Virtual author Q&A session</li>
+                    <li>Customized intro letter option</li>
+                </ul>
+                <a href="#contact-form" class="btn btn-outline">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases">
+        <h2>Perfect For</h2>
+        <div class="use-cases-grid">
+            <div class="use-case">
+                <div class="use-case-icon">📖</div>
+                <h3>Small Group Studies</h3>
+                <p>Facilitate meaningful discussions about faith and technology in your weekly gatherings.</p>
+            </div>
+            <div class="use-case">
+                <div class="use-case-icon">🎤</div>
+                <h3>Sermon Series Companion</h3>
+                <p>Provide a companion resource for a sermon series on navigating the digital age.</p>
+            </div>
+            <div class="use-case">
+                <div class="use-case-icon">👥</div>
+                <h3>Leadership Development</h3>
+                <p>Equip your staff and elders to thoughtfully engage with AI and its implications.</p>
+            </div>
+            <div class="use-case">
+                <div class="use-case-icon">🎓</div>
+                <h3>Youth & College Ministry</h3>
+                <p>Help young adults think critically about faith in their technology-saturated world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact-form">
+        <h2>Request Your Bulk Order</h2>
+        <p>Fill out the form below and we'll get back to you within 2 business days with a custom quote.</p>
+        <form class="contact-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="organization">Church / Organization Name</label>
+                <input type="text" id="organization" name="organization" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="quantity">Estimated Quantity</label>
+                    <select id="quantity" name="quantity" required>
+                        <option value="">Select quantity...</option>
+                        <option value="10-24">10-24 copies</option>
+                        <option value="25-49">25-49 copies</option>
+                        <option value="50-99">50-99 copies</option>
+                        <option value="100-249">100-249 copies</option>
+                        <option value="250+">250+ copies</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="timeline">Timeline</label>
+                    <select id="timeline" name="timeline" required>
+                        <option value="">Select timeline...</option>
+                        <option value="asap">As soon as possible</option>
+                        <option value="2-4-weeks">2-4 weeks</option>
+                        <option value="1-2-months">1-2 months</option>
+                        <option value="3-months+">3+ months</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="usage">How will you use the books?</label>
+                <textarea id="usage" name="usage" placeholder="Tell us about your small group, sermon series, or other plans for using the book..."></textarea>
+            </div>
+            <button type="submit" class="btn">Submit Request</button>
+        </form>
+    </section>
+
+    <!-- Bookstore Note -->
+    <div class="bookstore-note">
+        <p>You can also order through your favorite bookstore or distributor using<br>ISBN: <span class="isbn">978-8-2955-3249-8</span></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <span>|</span>
+            <a href="#">Terms of Use</a>
+            <span>|</span>
+            <a href="#">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 Mark Ross Junkans. All rights reserved.</p>
+    </footer>
+</body>
+</html>
