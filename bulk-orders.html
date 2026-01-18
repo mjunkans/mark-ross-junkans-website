@@ -150,99 +150,99 @@
             color: var(--text-dark);
         }
 
-        .pricing-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1200px;
+        .pricing-table-wrapper {
+            max-width: 900px;
             margin: 0 auto;
+            overflow-x: auto;
         }
 
-        .pricing-card {
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
             background: white;
-            border-radius: 8px;
-            padding: 40px 30px;
-            width: 340px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            transition: transform 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .pricing-card:hover {
-            transform: translateY(-5px);
+        .pricing-table th,
+        .pricing-table td {
+            padding: 18px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
         }
 
-        .pricing-card.popular {
-            border: 2px solid var(--primary-color);
+        .pricing-table th {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            background: var(--bg-light);
         }
 
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
+        .pricing-table th.popular {
             background: var(--primary-color);
             color: white;
-            padding: 5px 20px;
-            font-size: 0.75rem;
+            position: relative;
+        }
+
+        .pricing-table th.popular::after {
+            content: 'Most Popular';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-line);
+            color: var(--text-dark);
+            padding: 3px 12px;
+            font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            border-radius: 20px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
         }
 
-        .pricing-card h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.5rem;
+        .pricing-table td:first-child {
+            text-align: left;
             font-weight: 500;
             color: var(--text-dark);
-            margin-bottom: 10px;
         }
 
-        .pricing-card .quantity {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .pricing-card .discount {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .pricing-card .discount-label {
-            font-size: 0.85rem;
-            color: var(--text-medium);
-            margin-bottom: 25px;
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .pricing-card li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pricing-card li:last-child {
+        .pricing-table tr:last-child td {
             border-bottom: none;
         }
 
-        .pricing-card li::before {
-            content: '✓';
+        .pricing-table .tier-copies {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .pricing-table .tier-discount {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .pricing-table td.popular-col {
+            background: rgba(30, 58, 95, 0.03);
+        }
+
+        .pricing-table .check {
             color: var(--primary-color);
             font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .pricing-table .dash {
+            color: #ccc;
+        }
+
+        .pricing-cta {
+            text-align: center;
+            margin-top: 40px;
         }
 
         .btn {
@@ -258,23 +258,11 @@
             transition: background-color 0.3s ease;
             border: none;
             cursor: pointer;
-            width: 100%;
             text-align: center;
         }
 
         .btn:hover {
             background-color: var(--primary-hover);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
         }
 
         /* Use Cases Section */
@@ -493,13 +481,18 @@
                 font-size: 2.2rem;
             }
 
-            .pricing-card {
-                width: 100%;
-                max-width: 400px;
-            }
-
             .pricing-section {
                 padding: 50px 20px;
+            }
+
+            .pricing-table th,
+            .pricing-table td {
+                padding: 14px 12px;
+                font-size: 0.9rem;
+            }
+
+            .pricing-table .tier-discount {
+                font-size: 1.4rem;
             }
 
             .form-row {
@@ -583,25 +576,28 @@
                 margin-bottom: 30px;
             }
 
-            .pricing-grid {
-                gap: 25px;
+            .pricing-table th,
+            .pricing-table td {
+                padding: 12px 8px;
+                font-size: 0.8rem;
             }
 
-            .pricing-card {
-                padding: 30px 20px;
-            }
-
-            .pricing-card h3 {
-                font-size: 1.3rem;
-            }
-
-            .pricing-card .discount {
-                font-size: 2rem;
-            }
-
-            .pricing-card li {
+            .pricing-table th {
                 font-size: 0.9rem;
-                padding: 8px 0;
+            }
+
+            .pricing-table .tier-discount {
+                font-size: 1.2rem;
+            }
+
+            .pricing-table th.popular::after {
+                font-size: 0.55rem;
+                padding: 2px 8px;
+                top: -8px;
+            }
+
+            .pricing-cta {
+                margin-top: 30px;
             }
 
             .btn {
@@ -719,13 +715,22 @@
                 font-size: 1.3rem;
             }
 
-            .pricing-card .discount {
-                font-size: 1.8rem;
+            .pricing-table th,
+            .pricing-table td {
+                padding: 10px 6px;
+                font-size: 0.7rem;
             }
 
-            .popular-badge {
-                font-size: 0.65rem;
-                padding: 4px 15px;
+            .pricing-table th {
+                font-size: 0.75rem;
+            }
+
+            .pricing-table .tier-discount {
+                font-size: 1rem;
+            }
+
+            .pricing-table th.popular::after {
+                display: none;
             }
         }
     </style>
@@ -760,49 +765,58 @@
     <!-- Pricing Section -->
     <section class="pricing-section">
         <h2>Bulk Pricing</h2>
-        <div class="pricing-grid">
-            <!-- Small Group -->
-            <div class="pricing-card">
-                <h3>Small Group</h3>
-                <p class="quantity">10-24 copies</p>
-                <p class="discount">20% off</p>
-                <p class="discount-label">retail price</p>
-                <ul>
-                    <li>Free shipping</li>
-                    <li>Discussion questions included</li>
-                </ul>
-                <a href="#contact-form" class="btn btn-outline">Get Started</a>
-            </div>
-
-            <!-- Leadership Team -->
-            <div class="pricing-card popular">
-                <span class="popular-badge">Most Popular</span>
-                <h3>Leadership Team</h3>
-                <p class="quantity">25-49 copies</p>
-                <p class="discount">30% off</p>
-                <p class="discount-label">retail price</p>
-                <ul>
-                    <li>Free shipping</li>
-                    <li>Discussion questions included</li>
-                    <li>Virtual author Q&A session</li>
-                </ul>
-                <a href="#contact-form" class="btn">Get Started</a>
-            </div>
-
-            <!-- Congregation -->
-            <div class="pricing-card">
-                <h3>Congregation</h3>
-                <p class="quantity">50+ copies</p>
-                <p class="discount">40% off</p>
-                <p class="discount-label">retail price</p>
-                <ul>
-                    <li>Free shipping</li>
-                    <li>Discussion questions included</li>
-                    <li>Virtual author Q&A session</li>
-                    <li>Customized intro letter option</li>
-                </ul>
-                <a href="#contact-form" class="btn btn-outline">Get Started</a>
-            </div>
+        <div class="pricing-table-wrapper">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Small Group</th>
+                        <th>Leadership Team</th>
+                        <th>Congregation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Copies</td>
+                        <td class="tier-copies">10-24</td>
+                        <td class="tier-copies">25-49</td>
+                        <td class="tier-copies">50+</td>
+                    </tr>
+                    <tr>
+                        <td>Discount</td>
+                        <td class="tier-discount">20% off</td>
+                        <td class="tier-discount">30% off</td>
+                        <td class="tier-discount">40% off</td>
+                    </tr>
+                    <tr>
+                        <td>Free shipping</td>
+                        <td class="check">&#10003;</td>
+                        <td class="check">&#10003;</td>
+                        <td class="check">&#10003;</td>
+                    </tr>
+                    <tr>
+                        <td>Discussion questions</td>
+                        <td class="check">&#10003;</td>
+                        <td class="check">&#10003;</td>
+                        <td class="check">&#10003;</td>
+                    </tr>
+                    <tr>
+                        <td>Virtual author Q&A</td>
+                        <td class="dash">—</td>
+                        <td class="check">&#10003;</td>
+                        <td class="check">&#10003;</td>
+                    </tr>
+                    <tr>
+                        <td>Custom intro letter</td>
+                        <td class="dash">—</td>
+                        <td class="dash">—</td>
+                        <td class="check">&#10003;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pricing-cta">
+            <a href="#contact-form" class="btn">Request a Quote</a>
         </div>
     </section>
 
@@ -835,8 +849,8 @@
 
     <!-- Contact Form Section -->
     <section class="contact-section" id="contact-form">
-        <h2>Request Your Bulk Order</h2>
-        <p>Fill out the form below and we'll get back to you within 2 business days with a custom quote.</p>
+        <h2>Request a Quote</h2>
+        <p>Tell us about your needs and we'll get back to you within 2 business days with a custom quote.</p>
         <form class="contact-form" action="https://formspree.io/f/xeeeadbw" method="POST">
             <input type="hidden" name="_subject" value="New Bulk Order Request">
             <div class="form-row">
