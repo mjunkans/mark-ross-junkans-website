@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - Mark Ross Junkans</title>
+    <meta name="description" content="Digital resources for pastors and church leaders. AI prompts, Notion templates, and courses by Mark Ross Junkans.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #1e3a5f;
+            --primary-hover: #2d4a6f;
+            --text-dark: #333333;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --bg-white: #ffffff;
+            --bg-light: #f5f5f5;
+            --accent-line: #c4a24d;
+        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text-dark); line-height: 1.6; background-color: var(--bg-white); }
+        header { text-align: center; padding: 40px 20px 0; position: relative; }
+        header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--primary-color), transparent); }
+        .site-title { font-family: 'Playfair Display', Georgia, serif; font-size: 2.8rem; font-weight: 500; color: var(--text-dark); letter-spacing: 0.02em; margin-bottom: 30px; }
+        .site-title a { text-decoration: none; color: inherit; }
+        nav { padding: 20px 0; }
+        nav ul { list-style: none; display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; }
+        nav a { text-decoration: none; color: var(--text-dark); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s ease; }
+        nav a:hover, nav a.active { color: var(--primary-color); }
+        .btn { display: inline-block; padding: 15px 35px; background-color: var(--primary-color); color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: background-color 0.3s ease; }
+        .btn:hover { background-color: var(--primary-hover); }
+        .btn-outline { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        .btn-outline:hover { background: var(--primary-color); color: white; }
+
+        /* Store Hero */
+        .store-hero { text-align: center; padding: 80px 40px 60px; background: var(--bg-light); }
+        .store-hero h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 2.8rem; font-weight: 500; margin-bottom: 20px; color: var(--text-dark); }
+        .store-hero p { font-size: 1.15rem; color: var(--text-medium); max-width: 650px; margin: 0 auto; line-height: 1.8; }
+
+        /* Products Grid */
+        .products { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+        /* Products Grid — subgrid aligns every row across cards */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto auto auto auto; /* badge, desc, price, features, cta */
+            gap: 0 40px;
+        }
+        .product-card {
+            display: grid;
+            grid-row: span 5;
+            grid-template-rows: subgrid;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .product-badge { background: var(--primary-color); color: white; padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .product-badge .product-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+        .product-badge h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 500; line-height: 1.3; }
+        .product-desc { padding: 30px 30px 0; color: var(--text-medium); font-size: 0.95rem; line-height: 1.7; }
+        .product-price { padding: 20px 30px 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; color: var(--text-dark); }
+        .product-price span { font-size: 0.85rem; color: var(--text-light); font-family: 'Inter', sans-serif; }
+        .product-features { list-style: none; padding: 20px 30px 0; }
+        .product-features li { padding: 6px 0; font-size: 0.9rem; color: var(--text-medium); position: relative; padding-left: 22px; }
+        .product-features li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-line); font-weight: 700; }
+        .product-cta { text-align: center; padding: 25px 30px 30px; align-self: end; }
+
+        /* Coming Soon */
+        .product-card.coming-soon { opacity: 0.7; }
+        .product-card.coming-soon:hover { transform: none; box-shadow: none; }
+        .coming-soon-badge { display: inline-block; background: var(--accent-line); color: white; padding: 6px 16px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 15px; }
+        .btn-disabled { background: #ccc; border-color: #ccc; color: #666; cursor: not-allowed; pointer-events: none; }
+
+        /* Newsletter */
+        .newsletter { padding: 60px 40px; border-left: 4px solid var(--accent-line); margin: 0 40px 60px; }
+        .newsletter-container { display: flex; align-items: center; justify-content: space-between; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
+        .newsletter h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 400; color: var(--text-dark); }
+        .newsletter-form { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+        .newsletter-form input { padding: 15px 20px; border: 1px solid #ddd; font-size: 1rem; font-family: inherit; min-width: 300px; }
+        .newsletter-form input:focus { outline: none; border-color: var(--primary-color); }
+        .newsletter-form button { padding: 15px 30px; background-color: var(--primary-color); color: white; border: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s ease; }
+        .newsletter-form button:hover { background-color: var(--primary-hover); }
+
+        /* Footer */
+        footer { background-color: #2a2a2a; color: white; padding: 40px 20px; text-align: center; }
+        footer nav ul { margin-bottom: 25px; }
+        footer nav a { color: white; font-size: 0.85rem; }
+        footer nav a:hover { color: var(--accent-line); }
+        .footer-links { font-size: 0.85rem; color: #999; }
+        .footer-links a { color: #999; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: white; }
+        .footer-links span { margin: 0 10px; }
+        .copyright { margin-top: 20px; font-size: 0.8rem; color: #777; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .site-title { font-size: 2.2rem; }
+            nav ul { gap: 25px; }
+            .store-hero { padding: 60px 20px 40px; }
+            .store-hero h2 { font-size: 2rem; }
+            .products { padding: 50px 20px; }
+            .products-grid { grid-template-columns: 1fr; grid-template-rows: auto; max-width: 500px; margin: 0 auto; gap: 40px; }
+            .product-card { grid-row: auto; grid-template-rows: auto auto auto auto auto; }
+            .newsletter-container { flex-direction: column; text-align: center; }
+            .newsletter-form { justify-content: center; }
+            .newsletter { margin: 0 20px 40px; padding: 40px 20px; }
+        }
+        @media (max-width: 600px) {
+            header { padding: 25px 15px 0; }
+            .site-title { font-size: 1.6rem; margin-bottom: 20px; }
+            nav { padding: 15px 0; }
+            nav ul { gap: 8px 15px; padding: 0 10px; }
+            nav a { font-size: 0.7rem; letter-spacing: 0.05em; }
+            .store-hero h2 { font-size: 1.6rem; }
+            .store-hero p { font-size: 0.95rem; }
+            .products { padding: 30px 15px; }
+            .newsletter { margin: 0 15px 30px; padding: 30px 15px; }
+            .newsletter h3 { font-size: 1.1rem; }
+            .newsletter-form { width: 100%; }
+            .newsletter-form input { min-width: 100%; padding: 12px 15px; font-size: 0.9rem; }
+            .newsletter-form button { width: 100%; padding: 12px 20px; }
+            footer { padding: 30px 15px; }
+            footer nav ul { gap: 8px 15px; margin-bottom: 20px; }
+            footer nav a { font-size: 0.75rem; }
+            .footer-links { font-size: 0.75rem; }
+            .copyright { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="site-title"><a href="index.html">Mark Ross Junkans</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="store.html" class="active">Store</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="store-hero">
+        <h2>Resources for Pastors &amp; Church Leaders</h2>
+        <p>Practical tools to help you navigate AI, streamline church admin, and lead with confidence. Built by a pastor, for pastors.</p>
+    </section>
+
+    <section class="products">
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-badge">
+                    <p class="product-label">Digital Download</p>
+                    <h3>AI Prompts for Pastors</h3>
+                </div>
+                <p class="product-desc">75+ ready-to-use AI prompts designed specifically for ministry tasks. Sermon prep, pastoral care, admin, outreach, and more. Copy, paste, customize, get results.</p>
+                <div class="product-price">From $27 <span>/ one-time</span></div>
+                <ul class="product-features">
+                    <li>75+ tested, ministry-specific prompts</li>
+                    <li>Works with ChatGPT, Claude, Gemini</li>
+                    <li>Cut sermon prep time by 30-40%</li>
+                    <li>Ethical guidelines for AI in ministry</li>
+                    <li>Lifetime updates included</li>
+                </ul>
+                <div class="product-cta">
+                    <a href="ai-prompts-for-pastors.html" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card coming-soon">
+                <div class="product-badge" style="background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8a 100%);">
+                    <span class="coming-soon-badge">Coming Soon</span>
+                    <p class="product-label">Notion Template</p>
+                    <h3>Church Admin Template</h3>
+                </div>
+                <p class="product-desc">The all-in-one Notion workspace for managing your church. Sermons, members, events, budget, volunteers, and tasks. Stop juggling 12 spreadsheets.</p>
+                <div class="product-price">From $49 <span>/ one-time</span></div>
+                <ul class="product-features">
+                    <li>6 interconnected databases</li>
+                    <li>50+ pre-configured views</li>
+                    <li>Real-time dashboard</li>
+                    <li>Save 5-10 hours per week</li>
+                    <li>Mobile-friendly</li>
+                </ul>
+                <div class="product-cta">
+                    <a href="#" class="btn btn-disabled">Coming Soon</a>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card coming-soon">
+                <div class="product-badge" style="background: linear-gradient(135deg, #2d5a8a 0%, var(--primary-color) 100%);">
+                    <span class="coming-soon-badge">Coming Soon</span>
+                    <p class="product-label">Video Course</p>
+                    <h3>AI Ethics for Church Leaders</h3>
+                </div>
+                <p class="product-desc">A 5-module video course (95 minutes) that equips you to lead your church through AI with theological clarity, practical tools, and biblical wisdom.</p>
+                <div class="product-price">From $97 <span>/ one-time</span></div>
+                <ul class="product-features">
+                    <li>5 video modules (95 min total)</li>
+                    <li>70+ page student workbook</li>
+                    <li>Church AI Policy Template</li>
+                    <li>6-month implementation plan</li>
+                    <li>30-day money-back guarantee</li>
+                </ul>
+                <div class="product-cta">
+                    <a href="#" class="btn btn-disabled">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter" id="contact">
+        <div class="newsletter-container">
+            <h3>Get notified when new resources launch</h3>
+            <form class="newsletter-form" action="https://formspree.io/f/xwvvlzjo" method="POST">
+                <input type="email" name="email" placeholder="Your email address" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p id="form-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); display: none;"></p>
+        </div>
+    </section>
+
+    <script>
+        const form = document.querySelector('.newsletter-form');
+        const status = document.getElementById('form-status');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            try {
+                const response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+                if (response.ok) { status.textContent = 'Thank you for subscribing!'; status.style.display = 'block'; form.reset(); }
+                else { status.textContent = 'Oops! There was a problem. Please try again.'; status.style.display = 'block'; }
+            } catch (error) { status.textContent = 'Oops! There was a problem. Please try again.'; status.style.display = 'block'; }
+        });
+    </script>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a><span>|</span><a href="#">Terms of Use</a><span>|</span><a href="#">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 Mark Ross Junkans. All rights reserved.</p>
+    </footer>
+</body>
+</html>

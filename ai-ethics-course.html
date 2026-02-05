@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ethics for Church Leaders - Mark Ross Junkans</title>
+    <meta name="description" content="A 5-module video course equipping pastors to lead their churches through AI with theological clarity and practical tools.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-color: #1e3a5f; --primary-hover: #2d4a6f; --text-dark: #333333; --text-medium: #555555; --text-light: #777777; --bg-white: #ffffff; --bg-light: #f5f5f5; --accent-line: #c4a24d; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text-dark); line-height: 1.6; background-color: var(--bg-white); }
+        header { text-align: center; padding: 40px 20px 0; position: relative; }
+        header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--primary-color), transparent); }
+        .site-title { font-family: 'Playfair Display', Georgia, serif; font-size: 2.8rem; font-weight: 500; color: var(--text-dark); letter-spacing: 0.02em; margin-bottom: 30px; }
+        .site-title a { text-decoration: none; color: inherit; }
+        nav { padding: 20px 0; }
+        nav ul { list-style: none; display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; }
+        nav a { text-decoration: none; color: var(--text-dark); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s ease; }
+        nav a:hover, nav a.active { color: var(--primary-color); }
+        .btn { display: inline-block; padding: 15px 35px; background-color: var(--primary-color); color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; border: 2px solid var(--primary-color); }
+        .btn:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); }
+        .btn-lg { padding: 18px 45px; font-size: 0.95rem; }
+        .btn-outline { background: transparent; color: var(--primary-color); }
+        .btn-outline:hover { background: var(--primary-color); color: white; }
+        .btn-gold { background: var(--accent-line); border-color: var(--accent-line); }
+        .btn-gold:hover { background: #b3912e; border-color: #b3912e; }
+
+        .landing-hero { text-align: center; padding: 80px 40px; background: var(--bg-light); }
+        .landing-hero .label { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-line); font-weight: 600; margin-bottom: 15px; }
+        .landing-hero h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 2.6rem; font-weight: 500; max-width: 800px; margin: 0 auto 25px; line-height: 1.25; }
+        .landing-hero p { font-size: 1.15rem; color: var(--text-medium); max-width: 650px; margin: 0 auto 35px; line-height: 1.8; }
+
+        .section { padding: 80px 40px; max-width: 900px; margin: 0 auto; }
+        .section-alt { background: var(--bg-light); }
+        .section-alt .section { max-width: 900px; margin: 0 auto; }
+        .section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 500; margin-bottom: 25px; }
+        .section p { font-size: 1.05rem; color: var(--text-medium); line-height: 1.8; margin-bottom: 20px; }
+        .section p strong { color: var(--text-dark); }
+
+        /* Module List */
+        .modules { margin: 30px 0; }
+        .module { padding: 25px 30px; border-left: 4px solid var(--accent-line); margin-bottom: 20px; background: white; }
+        .section-alt .module { background: var(--bg-white); }
+        .module-number { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-line); font-weight: 700; margin-bottom: 5px; }
+        .module h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-weight: 500; margin-bottom: 8px; color: var(--text-dark); }
+        .module .duration { font-size: 0.85rem; color: var(--text-light); margin-bottom: 10px; }
+        .module p { font-size: 0.9rem; margin-bottom: 0; }
+
+        /* Includes grid */
+        .includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0; }
+        .include-item { display: flex; gap: 12px; align-items: flex-start; }
+        .include-item .check { color: var(--accent-line); font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+        .include-item p { margin: 0; font-size: 0.95rem; }
+        .include-item strong { display: block; color: var(--text-dark); margin-bottom: 2px; }
+
+        /* Differentiator */
+        .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+        .diff-col { padding: 25px; }
+        .diff-col.others { background: #faf0f0; border-top: 3px solid #ccc; }
+        .diff-col.this { background: #f0faf2; border-top: 3px solid var(--accent-line); }
+        .diff-col h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; margin-bottom: 12px; color: var(--text-dark); }
+        .diff-col ul { list-style: none; }
+        .diff-col ul li { padding: 5px 0; font-size: 0.9rem; color: var(--text-medium); padding-left: 20px; position: relative; }
+        .diff-col.others ul li::before { content: '–'; position: absolute; left: 0; color: #999; }
+        .diff-col.this ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-line); font-weight: 700; }
+
+        .pricing { padding: 80px 40px; text-align: center; background: var(--bg-light); }
+        .pricing h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; margin-bottom: 15px; }
+        .pricing > p { color: var(--text-medium); margin-bottom: 40px; font-size: 1.05rem; }
+        .pricing-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+        .pricing-card { background: white; padding: 40px 30px; text-align: center; flex: 1; min-width: 300px; max-width: 370px; border: 1px solid #e0e0e0; position: relative; }
+        .pricing-card.featured { border: 2px solid var(--accent-line); }
+        .pricing-card.featured::before { content: 'RECOMMENDED'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent-line); color: white; padding: 4px 20px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; }
+        .pricing-card h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; margin-bottom: 10px; color: var(--text-dark); }
+        .pricing-card .price { font-family: 'Playfair Display', Georgia, serif; font-size: 3rem; font-weight: 600; color: var(--primary-color); margin-bottom: 5px; }
+        .pricing-card .price-note { font-size: 0.85rem; color: var(--text-light); margin-bottom: 25px; }
+        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
+        .pricing-card ul li { padding: 8px 0; font-size: 0.9rem; color: var(--text-medium); border-bottom: 1px solid #f0f0f0; padding-left: 22px; position: relative; }
+        .pricing-card ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-line); font-weight: 700; }
+
+        .faq { padding: 80px 40px; max-width: 800px; margin: 0 auto; }
+        .faq h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        .faq-item { border-bottom: 1px solid #e0e0e0; }
+        .faq-question { padding: 20px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1rem; }
+        .faq-question::after { content: '+'; font-size: 1.5rem; color: var(--primary-color); }
+        .faq-item.open .faq-question::after { content: '−'; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer p { padding: 0 0 20px; font-size: 0.95rem; color: var(--text-medium); line-height: 1.7; }
+
+        .guarantee { text-align: center; padding: 60px 40px; background: var(--bg-light); }
+        .guarantee h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; margin-bottom: 20px; }
+        .guarantee p { max-width: 600px; margin: 0 auto 25px; color: var(--text-medium); font-size: 1.05rem; line-height: 1.8; }
+
+        /* About instructor */
+        .instructor { padding: 60px 40px; max-width: 800px; margin: 0 auto; text-align: center; }
+        .instructor h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; margin-bottom: 20px; }
+        .instructor p { font-size: 1rem; color: var(--text-medium); line-height: 1.8; margin-bottom: 15px; }
+
+        .cta-banner { text-align: center; padding: 60px 40px; background: var(--primary-color); color: white; }
+        .cta-banner h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; margin-bottom: 15px; color: white; }
+        .cta-banner p { color: rgba(255,255,255,0.85); margin-bottom: 30px; font-size: 1.05rem; }
+        .cta-banner .btn { background: var(--accent-line); border-color: var(--accent-line); }
+        .cta-banner .btn:hover { background: #b3912e; border-color: #b3912e; }
+
+        footer { background-color: #2a2a2a; color: white; padding: 40px 20px; text-align: center; }
+        footer nav ul { margin-bottom: 25px; }
+        footer nav a { color: white; font-size: 0.85rem; }
+        footer nav a:hover { color: var(--accent-line); }
+        .footer-links { font-size: 0.85rem; color: #999; }
+        .footer-links a { color: #999; text-decoration: none; }
+        .footer-links a:hover { color: white; }
+        .footer-links span { margin: 0 10px; }
+        .copyright { margin-top: 20px; font-size: 0.8rem; color: #777; }
+
+        @media (max-width: 900px) {
+            .site-title { font-size: 2.2rem; } nav ul { gap: 25px; }
+            .landing-hero h2 { font-size: 2rem; }
+            .includes-grid, .diff-grid { grid-template-columns: 1fr; }
+            .section { padding: 60px 20px; }
+        }
+        @media (max-width: 600px) {
+            header { padding: 25px 15px 0; } .site-title { font-size: 1.6rem; margin-bottom: 20px; }
+            nav { padding: 15px 0; } nav ul { gap: 8px 15px; padding: 0 10px; } nav a { font-size: 0.7rem; }
+            .landing-hero { padding: 50px 20px; } .landing-hero h2 { font-size: 1.5rem; }
+            .section { padding: 40px 15px; } .section h2 { font-size: 1.6rem; }
+            .pricing { padding: 50px 15px; } .pricing-grid { flex-direction: column; align-items: center; } .pricing-card { min-width: 100%; }
+            .faq { padding: 50px 15px; } .guarantee { padding: 40px 15px; } .cta-banner { padding: 40px 15px; }
+            footer { padding: 30px 15px; } footer nav ul { gap: 8px 15px; } footer nav a { font-size: 0.75rem; }
+            .footer-links { font-size: 0.75rem; } .copyright { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="site-title"><a href="index.html">Mark Ross Junkans</a></h1>
+        <nav><ul>
+            <li><a href="index.html">Home</a></li><li><a href="index.html#books">Books</a></li><li><a href="index.html#about">About Mark</a></li>
+            <li><a href="speaking.html">Speaking</a></li><li><a href="store.html" class="active">Store</a></li><li><a href="index.html#contact">Contact</a></li>
+        </ul></nav>
+    </header>
+
+    <section class="landing-hero">
+        <p class="label">Video Course</p>
+        <h2>Lead Your Church Through AI With Confidence, Clarity, and Biblical Wisdom</h2>
+        <p>A 5-module video course for pastors and church leaders navigating the most important technology conversation of our generation.</p>
+        <a href="#pricing" class="btn btn-lg">Enroll Now</a>
+    </section>
+
+    <div class="section">
+        <h2>Your Congregation Is Using AI. Right Now.</h2>
+        <p>Students are using ChatGPT for Bible study homework. Business owners are implementing AI in their companies. Parents are asking Alexa for parenting advice.</p>
+        <p>And they're asking you questions: "Is AI sinful?" "Can I use it for sermon prep?" "What does the Bible say about this?" "Will my job be taken by a robot?"</p>
+        <p><strong>Here's the uncomfortable truth: most pastors don't have good answers.</strong></p>
+        <p>Not because you're not smart. Not because you don't care. But because nobody's equipped you to think theologically about AI. You studied Greek and Hebrew. You learned church history and systematic theology. But AI ethics wasn't in the seminary curriculum.</p>
+        <p><strong>If you don't lead them, someone else will.</strong> And right now, your congregation is getting their answers from Silicon Valley, YouTube, and wherever else they can find them.</p>
+    </div>
+
+    <div class="section-alt">
+        <div class="section">
+            <h2>The Curriculum</h2>
+            <p>95 minutes of focused, practical content. Watch at your own pace. Apply immediately.</p>
+            <div class="modules">
+                <div class="module">
+                    <div class="module-number">Module 1</div>
+                    <h3>Why AI Matters for Ministry</h3>
+                    <div class="duration">15 minutes</div>
+                    <p>The AI revolution and your church. Three postures to avoid (fear, hype, drift). The alternative: wise stewardship. Three questions for evaluating any AI tool.</p>
+                </div>
+                <div class="module">
+                    <div class="module-number">Module 2</div>
+                    <h3>Theological Framework for AI</h3>
+                    <div class="duration">18 minutes</div>
+                    <p>Imago Dei: what makes humans uniquely human. Incarnation: why embodiment matters. Creation mandate: faithful stewardship. The Theological Filter for every AI decision.</p>
+                </div>
+                <div class="module">
+                    <div class="module-number">Module 3</div>
+                    <h3>AI in Preaching, Teaching, and Worship</h3>
+                    <div class="duration">20 minutes</div>
+                    <p>When to use AI in sermon prep (and when not to). AI in discipleship and formation. AI-generated music, liturgy, and art. Creating your personal AI policy.</p>
+                </div>
+                <div class="module">
+                    <div class="module-number">Module 4</div>
+                    <h3>Navigating Ethical Challenges</h3>
+                    <div class="duration">22 minutes</div>
+                    <p>AI bias and justice. Surveillance and privacy. Job displacement and economic impacts. Can a bot provide pastoral care? Real-world case studies and discussion.</p>
+                </div>
+                <div class="module">
+                    <div class="module-number">Module 5</div>
+                    <h3>Leading Your Church Through AI</h3>
+                    <div class="duration">18 minutes</div>
+                    <p>Creating a church AI policy step-by-step. Teaching your congregation (sermon series, workshops). Getting leadership buy-in. Your 6-month implementation plan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Everything You Need to Lead</h2>
+        <div class="includes-grid">
+            <div class="include-item"><span class="check">✓</span><p><strong>Church AI Policy Template</strong>6-page customizable template ready to adapt and implement</p></div>
+            <div class="include-item"><span class="check">✓</span><p><strong>Personal AI Policy Template</strong>Define your own boundaries for AI use in ministry</p></div>
+            <div class="include-item"><span class="check">✓</span><p><strong>70+ Page Student Workbook</strong>Reflection questions, case studies, Scripture references, glossaries</p></div>
+            <div class="include-item"><span class="check">✓</span><p><strong>Sample Sermon Outline</strong>"Made in God's Image in the Age of AI"</p></div>
+            <div class="include-item"><span class="check">✓</span><p><strong>6-Month Implementation Plan</strong>From education to policy rollout, step by step</p></div>
+            <div class="include-item"><span class="check">✓</span><p><strong>Curated Resource List</strong>Books, articles, and videos for continued learning</p></div>
+        </div>
+    </div>
+
+    <div class="section-alt">
+        <div class="section">
+            <h2>What Makes This Different</h2>
+            <div class="diff-grid">
+                <div class="diff-col others">
+                    <h3>Other AI Ethics Courses</h3>
+                    <ul>
+                        <li>Written by tech ethicists, not pastors</li>
+                        <li>Focus on abstract philosophy</li>
+                        <li>Don't provide implementation tools</li>
+                        <li>Ignore incarnation, imago Dei, biblical theology</li>
+                    </ul>
+                </div>
+                <div class="diff-col this">
+                    <h3>This Course</h3>
+                    <ul>
+                        <li>Written by a pastor, for pastors</li>
+                        <li>Rooted in Scripture and theology</li>
+                        <li>Includes ready-to-use policy templates</li>
+                        <li>Practical, pastoral, and implementable</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center;"><strong>You don't need another tech course. You need a pastoral leadership course. This is it.</strong></p>
+        </div>
+    </div>
+
+    <section class="instructor">
+        <h2>About the Instructor</h2>
+        <p><strong>Mark Ross Junkans</strong> is an ordained LCMS pastor, author of <em>The Return of Mystery: Faith in an Age of Machines</em>, and a former bivocational pastor with experience in missionary work, technology, and international business.</p>
+        <p>Mark codes. He's built AI tools. He's also done hospital visits, preached funerals, and led Bible studies in cross-cultural contexts. This course comes from someone who understands both the technology and the pastoral calling.</p>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <h2>Choose Your Option</h2>
+        <p>30-day money-back guarantee on both tiers.</p>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <div class="price">$97</div>
+                <div class="price-note">one-time, lifetime access</div>
+                <ul>
+                    <li>All 5 video modules (95 min)</li>
+                    <li>Complete student workbook (70+ pages)</li>
+                    <li>Church AI Policy Template</li>
+                    <li>Personal AI Policy Template</li>
+                    <li>Lifetime access</li>
+                </ul>
+                <a href="#buy" class="btn btn-outline buy-btn" data-product="ai-ethics" data-tier="basic">Enroll Basic</a>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Complete</h3>
+                <div class="price">$197</div>
+                <div class="price-note">one-time, lifetime access</div>
+                <ul>
+                    <li>Everything in Basic</li>
+                    <li>PowerPoint slides (all 5 modules)</li>
+                    <li>Small group teaching guides</li>
+                    <li>Email templates for congregation</li>
+                    <li>Private community access</li>
+                    <li>Quarterly live Q&amp;A calls (first year)</li>
+                    <li>Lifetime updates</li>
+                </ul>
+                <a href="#buy" class="btn btn-gold buy-btn" data-product="ai-ethics" data-tier="complete">Enroll Complete</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item"><div class="faq-question">I'm not tech-savvy. Will I be able to follow this?</div><div class="faq-answer"><p>Absolutely. This course assumes zero technical knowledge. It's designed for pastors, not programmers. If you can watch a video and read a workbook, you're good.</p></div></div>
+        <div class="faq-item"><div class="faq-question">How long will it take to complete?</div><div class="faq-answer"><p>The videos are 95 minutes total (about 1.5 hours). Watch all at once or spread it out. The workbook adds another 2-3 hours if you do all the reflection questions. Most pastors complete it in one week.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Is this specific to a certain denomination?</div><div class="faq-answer"><p>The course is broadly Protestant but applicable across traditions. The theological framework (imago Dei, incarnation, creation mandate) is ecumenical. Examples are adapted to various contexts.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Will the course be updated as AI changes?</div><div class="faq-answer"><p>Yes. The Complete version includes lifetime updates. As AI evolves, new modules, case studies, and resources will be added. You'll be notified when updates are available.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Can I use this to train my staff or leadership?</div><div class="faq-answer"><p>Yes. The Complete version includes PowerPoint slides and teaching guides for presenting to your team. Email mjunkans71@gmail.com for group pricing (5+ seats).</p></div></div>
+        <div class="faq-item"><div class="faq-question">What if I disagree with some of your conclusions?</div><div class="faq-answer"><p>Good. The goal isn't for you to agree with everything. The goal is to equip you to think theologically about AI. Use the framework, adapt it to your context, and make it your own.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Do you offer continuing education credits?</div><div class="faq-answer"><p>Not currently, but exploring partnerships with seminaries and denominations. Email me if this matters to you.</p></div></div>
+    </section>
+
+    <section class="guarantee">
+        <h2>30-Day Money-Back Guarantee</h2>
+        <p>Take the course. Use the templates. Try the framework. If you don't feel more equipped to lead your church through AI, email me within 30 days. Full refund. No questions, no hassle.</p>
+        <p>I'm a pastor. I get it. This has to work, or it's not worth your time or money.</p>
+    </section>
+
+    <section class="cta-banner">
+        <h2>Your Congregation Needs You to Lead on This</h2>
+        <p>5 modules. 95 minutes. A complete framework for faithful AI leadership.</p>
+        <a href="#pricing" class="btn btn-lg">Enroll Now</a>
+        <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">Questions? Email mjunkans71@gmail.com</p>
+    </section>
+
+    <footer>
+        <nav><ul>
+            <li><a href="index.html">Home</a></li><li><a href="index.html#books">Books</a></li><li><a href="index.html#about">About Mark</a></li>
+            <li><a href="speaking.html">Speaking</a></li><li><a href="store.html">Store</a></li><li><a href="index.html#contact">Contact</a></li>
+        </ul></nav>
+        <div class="footer-links"><a href="#">Privacy Policy</a><span>|</span><a href="#">Terms of Use</a><span>|</span><a href="#">Contact</a></div>
+        <p class="copyright">&copy; 2026 Mark Ross Junkans. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement, answer = q.nextElementSibling, isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-answer').style.maxHeight = null; });
+                if (!isOpen) { item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
+            });
+        });
+    </script>
+</body>
+</html>

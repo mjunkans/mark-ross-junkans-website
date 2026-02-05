@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Church Admin Template – Mark Ross Junkans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a5f;
+            --primary-hover: #2d4a6f;
+            --text-dark: #333333;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --bg-white: #ffffff;
+            --bg-light: #f5f5f5;
+            --accent-line: #c4a24d;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 0;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .site-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            letter-spacing: 0.02em;
+            margin-bottom: 30px;
+        }
+
+        nav {
+            padding: 20px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .section {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+
+        .section.alt {
+            background: var(--bg-light);
+            padding: 80px 40px;
+            margin: 0 0 80px 0;
+            max-width: 100%;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin: 40px 0 20px;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .section ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .section ul li {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .section ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-line);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-left: 3px solid var(--accent-line);
+        }
+
+        .feature-card h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .comparison-section {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .comparison-card {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .comparison-card.before {
+            background: #fff5f5;
+            border: 2px solid #e57373;
+        }
+
+        .comparison-card.after {
+            background: #f1f8f4;
+            border: 2px solid var(--accent-line);
+        }
+
+        .comparison-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .comparison-card.before h3 {
+            color: #c62828;
+        }
+
+        .comparison-card.after h3 {
+            color: var(--primary-color);
+        }
+
+        .comparison-card ul {
+            text-align: left;
+            list-style: none;
+            margin: 0;
+        }
+
+        .comparison-card ul li {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .comparison-card.before ul li::before {
+            content: '✗';
+            color: #c62828;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .comparison-card.after ul li::before {
+            content: '✓';
+            color: var(--accent-line);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .pricing-section {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: var(--bg-light);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.recommended {
+            border: 3px solid var(--accent-line);
+        }
+
+        .pricing-card.recommended::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-line);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .pricing-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .pricing-card ul {
+            text-align: left;
+            margin: 30px 0 40px;
+        }
+
+        .pricing-card ul li {
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .buy-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .faq-section {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .faq-question {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            padding: 20px 0;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 0 0 0;
+        }
+
+        .faq-answer.active {
+            max-height: 1000px;
+            padding: 0 0 20px 0;
+        }
+
+        .faq-answer p {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .guarantee-section {
+            background: var(--bg-light);
+            padding: 60px 40px;
+            text-align: center;
+            border-left: 4px solid var(--accent-line);
+            margin: 0 40px 80px;
+        }
+
+        .guarantee-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .guarantee-section p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 15px;
+        }
+
+        footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer nav ul {
+            margin-bottom: 25px;
+        }
+
+        footer nav a {
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        footer nav a:hover {
+            color: var(--accent-line);
+        }
+
+        .footer-links {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links span {
+            margin: 0 10px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 25px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .section {
+                padding: 0 20px;
+            }
+
+            .section.alt {
+                padding: 60px 20px;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .pricing-section {
+                padding: 0 20px;
+            }
+
+            .pricing-cards {
+                gap: 30px;
+            }
+
+            .faq-section {
+                padding: 0 20px;
+            }
+
+            .guarantee-section {
+                margin: 0 20px 60px;
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 25px 15px 0;
+            }
+
+            .site-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            nav {
+                padding: 15px 0;
+            }
+
+            nav ul {
+                gap: 8px 15px;
+                padding: 0 10px;
+            }
+
+            nav a {
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+            }
+
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 0 15px;
+                margin-bottom: 60px;
+            }
+
+            .section.alt {
+                padding: 50px 15px;
+                margin-bottom: 60px;
+            }
+
+            .section h2 {
+                font-size: 1.6rem;
+            }
+
+            .section h3 {
+                font-size: 1.3rem;
+            }
+
+            .section p {
+                font-size: 0.95rem;
+            }
+
+            .section ul li {
+                font-size: 0.95rem;
+            }
+
+            .features-grid {
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+
+            .comparison-section {
+                padding: 0 15px;
+            }
+
+            .comparison-card {
+                padding: 25px 15px;
+            }
+
+            .comparison-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .comparison-card ul li {
+                font-size: 0.9rem;
+            }
+
+            .pricing-section {
+                padding: 0 15px;
+                margin-bottom: 60px;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card {
+                padding: 35px 25px;
+            }
+
+            .pricing-card h3 {
+                font-size: 1.6rem;
+            }
+
+            .pricing-card .price {
+                font-size: 2.4rem;
+            }
+
+            .btn {
+                padding: 14px 30px;
+                font-size: 0.85rem;
+            }
+
+            .faq-section {
+                padding: 0 15px;
+                margin-bottom: 60px;
+            }
+
+            .faq-question {
+                font-size: 1.1rem;
+                padding: 15px 30px 15px 0;
+            }
+
+            .faq-answer p {
+                font-size: 0.95rem;
+            }
+
+            .guarantee-section {
+                margin: 0 15px 50px;
+                padding: 30px 15px;
+            }
+
+            .guarantee-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .guarantee-section p {
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 30px 15px;
+            }
+
+            footer nav ul {
+                gap: 8px 15px;
+                margin-bottom: 20px;
+            }
+
+            footer nav a {
+                font-size: 0.75rem;
+            }
+
+            .footer-links {
+                font-size: 0.75rem;
+            }
+
+            .footer-links span {
+                margin: 0 5px;
+            }
+
+            .copyright {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="site-title">Mark Ross Junkans</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero fade-in">
+        <h1>Stop Juggling 12 Spreadsheets. Manage Your Entire Church in One Place.</h1>
+        <p class="subtitle">The all-in-one Notion template built specifically for pastors and church leaders who are tired of scattered systems and want to actually spend time with people.</p>
+    </section>
+
+    <section class="section fade-in">
+        <h2>The Problem</h2>
+        <p>You're managing a church with:</p>
+        <ul>
+            <li>5 different Google Sheets (members, volunteers, budget, events, sermon planning)</li>
+            <li>A paper planner for pastoral care notes</li>
+            <li>Email folders for follow-up reminders</li>
+            <li>Sticky notes on your desk</li>
+            <li>Your memory (which is failing you)</li>
+        </ul>
+        <p>And every week, something falls through the cracks.</p>
+        <p><strong>You forgot to follow up with that new visitor.</strong></p>
+        <p><strong>You can't find that sermon outline you wrote 3 months ago.</strong></p>
+        <p><strong>You have no idea who's volunteering next Sunday.</strong></p>
+        <p><strong>The budget report is... somewhere.</strong></p>
+        <p>This isn't because you're disorganized. It's because you're using tools that weren't built for ministry.</p>
+        <p>You're a pastor, not a project manager. You shouldn't need an MBA to manage your church.</p>
+        <p>But here you are, spending 10+ hours a week on admin tasks that should take 2.</p>
+        <p><strong>Meanwhile, people need you. And you're stuck in spreadsheets.</strong></p>
+    </section>
+
+    <section class="section alt fade-in">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2>The Solution</h2>
+            <p><strong>Notion Church Admin Template</strong> is a complete, pre-built Notion workspace that consolidates everything you need to run your church into one beautifully organized system.</p>
+            <p><strong>Sermons. Members. Events. Budget. Volunteers. Tasks. All in one place.</strong></p>
+            <p>No more switching between apps. No more lost information. No more "Where did I put that?"</p>
+            <p>Just open Notion. Everything's there.</p>
+            <h3>What You Get:</h3>
+            <ul>
+                <li><strong>6 fully-built databases</strong> (Sermons, Tasks, Members, Events, Budget, Volunteers)</li>
+                <li><strong>50+ pre-configured views</strong> so you see exactly what you need, when you need it</li>
+                <li><strong>Smart interconnections</strong> between databases (link sermons to events, volunteers to tasks, etc.)</li>
+                <li><strong>Real-time dashboard</strong> showing your week at a glance</li>
+                <li><strong>Mobile-friendly</strong> so you can update pastoral notes from the hospital</li>
+            </ul>
+            <p><strong>Setup time:</strong> 30 minutes to duplicate and customize<br>
+            <strong>Time saved:</strong> 5-10 hours per week</p>
+            <p>You'll finally have time to do what you became a pastor for: shepherding people.</p>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <h2>6 Core Databases (Fully Built)</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>1. Sermons Database</h4>
+                <p>Track sermon ideas, research, outlines, manuscripts. Calendar view of preaching schedule. Kanban board (Idea to Final). Searchable archive by topic or date.</p>
+            </div>
+            <div class="feature-card">
+                <h4>2. Tasks Database</h4>
+                <p>All church tasks in one place. Filter by priority, due date, category. Recurring task automation. Link to events, sermons, or members. Overdue alerts.</p>
+            </div>
+            <div class="feature-card">
+                <h4>3. Members Database</h4>
+                <p>Complete member directory with contact info. Birthdays, anniversaries, join dates. Pastoral care notes (private, searchable). Track small groups and serving roles. Visitor follow-up queue.</p>
+            </div>
+            <div class="feature-card">
+                <h4>4. Events Database</h4>
+                <p>Calendar of all church events. Track attendance, budget, volunteers needed. Link events to sermons, tasks, and volunteers. Post-event review notes. Searchable archive.</p>
+            </div>
+            <div class="feature-card">
+                <h4>5. Budget Tracker</h4>
+                <p>Income and expenses in one view. Track by category (missions, staff, building, ministry). Year-to-date totals. Compare budget vs. actual. Receipt uploads.</p>
+            </div>
+            <div class="feature-card">
+                <h4>6. Volunteer Management</h4>
+                <p>Who's serving when. Track recurring roles (worship, children's, hospitality). Training completion tracking. Confirmation sent checkboxes. Link volunteers to events.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt fade-in">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2>The Dashboard: Your Command Center</h2>
+            <p><strong>Hero Stats (4 cards across the top):</strong></p>
+            <ul>
+                <li>Next sermon (date, topic, status)</li>
+                <li>Open tasks (total + overdue count)</li>
+                <li>New members this month</li>
+                <li>Budget YTD (percentage of annual goal)</li>
+            </ul>
+            <p><strong>Navigation Cards:</strong> Quick-access buttons to Sermons, Tasks, Members, Events, Budget, Volunteers</p>
+            <p><strong>This Week At A Glance:</strong></p>
+            <ul>
+                <li>Sermon deadline tracker</li>
+                <li>This week's tasks</li>
+                <li>Upcoming events (next 7 days)</li>
+                <li>Pastoral care queue (members needing follow-up)</li>
+            </ul>
+            <p><strong>Everything you need to see. Nothing you don't.</strong></p>
+        </div>
+    </section>
+
+    <section class="comparison-section fade-in">
+        <h2>Before vs. After</h2>
+        <div class="comparison-grid">
+            <div class="comparison-card before">
+                <h3>Before (Scattered Systems)</h3>
+                <ul>
+                    <li>5+ spreadsheets across Google Drive</li>
+                    <li>Paper planner for pastoral notes</li>
+                    <li>Email folders for member follow-up</li>
+                    <li>Can't find anything</li>
+                    <li>10+ hours/week on admin</li>
+                </ul>
+            </div>
+            <div class="comparison-card after">
+                <h3>After (Notion Template)</h3>
+                <ul>
+                    <li>Everything in one place</li>
+                    <li>Searchable, organized, interconnected</li>
+                    <li>Mobile-accessible</li>
+                    <li>Actually remember to follow up</li>
+                    <li>5 hours/week on admin (5 hours saved!)</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 40px; font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; color: var(--primary-color);">What would you do with 5 extra hours per week?</p>
+    </section>
+
+    <section class="pricing-section fade-in">
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; text-align: center; margin-bottom: 20px;">Choose Your Package</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <div class="price">$49</div>
+                <ul>
+                    <li>Complete Notion template (all 6 databases + dashboard)</li>
+                    <li>Setup instructions PDF (10 pages)</li>
+                    <li>Email support</li>
+                </ul>
+                <a href="#buy" class="btn buy-btn" data-product="notion-template" data-tier="basic">Buy Basic</a>
+            </div>
+            <div class="pricing-card recommended">
+                <h3>Complete</h3>
+                <div class="price">$97</div>
+                <ul>
+                    <li>Everything in Basic</li>
+                    <li>Video walkthrough (7-minute tour)</li>
+                    <li>Bonus: 20+ pre-built filter templates</li>
+                    <li>Private Slack community</li>
+                    <li>1 hour optional setup call (first 50 buyers only)</li>
+                    <li>Lifetime updates</li>
+                </ul>
+                <a href="#buy" class="btn buy-btn" data-product="notion-template" data-tier="complete">Buy Complete</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section fade-in">
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">I've never used Notion. Will this be too complicated?</div>
+            <div class="faq-answer">
+                <p>There is a learning curve to Notion, but the template does most of the work for you. The setup instructions walk you through everything step-by-step. If you can use Google Sheets, you can use this. That said, if you've never opened Notion before, budget 1-2 hours to get comfortable.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Do I need a paid Notion account?</div>
+            <div class="faq-answer">
+                <p>Not necessarily. Notion's free plan works for solo pastors. If you have a team (staff, volunteers), you'll want Notion's Team plan ($8-10/user/month). The template works with either.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I customize the template for my church's specific needs?</div>
+            <div class="faq-answer">
+                <p>Absolutely. The template is fully customizable. Add fields, change views, rename things. It's yours. The setup guide includes tips for common customizations.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What if my church uses a different system (Planning Center, ChurchTrac, etc.)?</div>
+            <div class="faq-answer">
+                <p>This template is best for churches that don't already have a robust church management system (ChMS). If you're happy with your current system, you probably don't need this. But if you're frustrated with piecemeal tools or expensive ChMS subscriptions, this is a great alternative.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can multiple staff members use this template?</div>
+            <div class="faq-answer">
+                <p>Yes. You can share the Notion workspace with your staff. Each person can have their own views and filters. Note: Notion charges per user for teams (after the first 10 guests on the free plan).</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">How do I get the template?</div>
+            <div class="faq-answer">
+                <p>After purchase, you'll receive a link to duplicate the template into your own Notion workspace. It takes about 5 minutes to duplicate, then 20-30 minutes to customize with your church's info.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Will this integrate with my church's giving platform or website?</div>
+            <div class="faq-answer">
+                <p>Not directly. Notion has limited integrations compared to dedicated ChMS platforms. This template is best for internal church management, not public-facing tools. You can manually input data or use Zapier for basic automation.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What if Notion changes and breaks the template?</div>
+            <div class="faq-answer">
+                <p>If you purchase the Complete version, you get lifetime updates. If Notion makes breaking changes, I'll update the template and notify you.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I get a refund if it doesn't work for me?</div>
+            <div class="faq-answer">
+                <p>Yes. 30-day money-back guarantee. Try it. If it's not a fit, email me.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee-section fade-in">
+        <h2>30-Day Money-Back Guarantee</h2>
+        <p>Duplicate the template. Set it up. Use it for a month.</p>
+        <p>If it doesn't save you time and reduce your admin stress, email me. I'll refund you.</p>
+        <p>No questions. No hassle.</p>
+        <p><strong>Questions? Email me: mjunkans71@gmail.com</strong></p>
+    </section>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+                document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+                
+                // Open clicked answer if it wasn't active
+                if (!isActive) {
+                    answer.classList.add('active');
+                    question.classList.add('active');
+                }
+            });
+        });
+
+        // Fade-in on scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <span>|</span>
+            <a href="#">Terms of Use</a>
+            <span>|</span>
+            <a href="#">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 Mark Ross Junkans. All rights reserved.</p>
+    </footer>
+</body>
+</html>
