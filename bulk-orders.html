@@ -908,8 +908,16 @@
         bulkForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const fd = new FormData(bulkForm);
+            const backupData = new FormData(bulkForm);
             bulkStatus.textContent = 'Submitting your request...';
             bulkStatus.style.display = 'block';
+
+            // Send to Formspree backup in parallel (fire and forget)
+            fetch(bulkForm.action, {
+                method: 'POST',
+                body: backupData,
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
 
             try {
                 // Send to CRM
@@ -944,14 +952,6 @@
                 bulkStatus.style.color = '#dc2626';
             }
 
-            // Also send to Formspree as backup
-            try {
-                await fetch(bulkForm.action, {
-                    method: 'POST',
-                    body: new FormData(bulkForm),
-                    headers: { 'Accept': 'application/json' },
-                });
-            } catch (e) { /* silent backup */ }
         });
     </script>
 

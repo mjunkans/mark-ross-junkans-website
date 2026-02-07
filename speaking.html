@@ -837,8 +837,16 @@
         speakingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const fd = new FormData(speakingForm);
+            const backupData = new FormData(speakingForm);
             speakingStatus.textContent = 'Submitting your request...';
             speakingStatus.style.display = 'block';
+
+            // Send to Formspree backup in parallel (fire and forget)
+            fetch(speakingForm.action, {
+                method: 'POST',
+                body: backupData,
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
 
             try {
                 // Send to CRM
@@ -877,14 +885,6 @@
                 speakingStatus.style.color = '#dc2626';
             }
 
-            // Also send to Formspree as backup
-            try {
-                await fetch(speakingForm.action, {
-                    method: 'POST',
-                    body: new FormData(speakingForm),
-                    headers: { 'Accept': 'application/json' },
-                });
-            } catch (e) { /* silent backup */ }
         });
     </script>
 

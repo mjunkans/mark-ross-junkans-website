@@ -862,8 +862,16 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = form.querySelector('input[type="email"]').value;
+            const backupData = new FormData(form);
             status.textContent = 'Subscribing...';
             status.style.display = 'block';
+
+            // Send to Formspree backup in parallel (fire and forget)
+            fetch(form.action, {
+                method: 'POST',
+                body: backupData,
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
 
             try {
                 // Send to CRM
@@ -886,15 +894,6 @@
                 status.textContent = 'Oops! There was a problem. Please try again.';
                 status.style.color = '#dc2626';
             }
-
-            // Also send to Formspree as backup
-            try {
-                await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' },
-                });
-            } catch (e) { /* silent backup */ }
         });
     </script>
 
