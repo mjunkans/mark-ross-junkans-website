@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Mark Ross Junkans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a5f;
+            --primary-hover: #2d4a6f;
+            --text-dark: #333333;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --bg-white: #ffffff;
+            --bg-light: #f5f5f5;
+            --accent-line: #c4a24d;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px 0;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .site-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            letter-spacing: 0.02em;
+            margin-bottom: 30px;
+        }
+
+        .site-title a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            text-align: center;
+            padding: 80px 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .page-hero .subtitle {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            color: var(--text-medium);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Quick Links Section */
+        .quick-links {
+            padding: 0 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .quick-links-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 30px 25px;
+            width: 250px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-link-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .quick-link-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .quick-link-card p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        /* Contact Form Section */
+        .contact-section {
+            padding: 80px 40px;
+            background-color: var(--bg-light);
+        }
+
+        .contact-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .contact-section > p {
+            text-align: center;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 60px 40px;
+            border-left: 4px solid var(--accent-line);
+            margin: 60px 40px;
+        }
+
+        .newsletter-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .newsletter h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .newsletter-form input {
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            font-family: inherit;
+            min-width: 300px;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2a2a2a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer nav ul {
+            margin-bottom: 25px;
+        }
+
+        footer nav a {
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        footer nav a:hover {
+            color: var(--accent-line);
+        }
+
+        .footer-links {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links span {
+            margin: 0 10px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .site-title {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 25px;
+            }
+
+            .page-hero {
+                padding: 60px 20px 40px;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .contact-section {
+                padding: 60px 20px;
+            }
+
+            .quick-links {
+                padding: 0 20px 40px;
+            }
+
+            .quick-link-card {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .newsletter-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                justify-content: center;
+            }
+
+            .newsletter {
+                margin: 40px 20px;
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 25px 15px 0;
+            }
+
+            .site-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            .site-title a {
+                text-decoration: none;
+            }
+
+            nav {
+                padding: 15px 0;
+            }
+
+            nav ul {
+                gap: 8px 15px;
+                padding: 0 10px;
+            }
+
+            nav a {
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+            }
+
+            .page-hero {
+                padding: 40px 15px 30px;
+            }
+
+            .page-hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .page-hero p {
+                font-size: 0.95rem;
+            }
+
+            .quick-links {
+                padding: 0 15px 30px;
+            }
+
+            .quick-link-card {
+                padding: 20px 15px;
+            }
+
+            .quick-link-icon {
+                font-size: 1.5rem;
+            }
+
+            .quick-link-card h3 {
+                font-size: 1rem;
+            }
+
+            .contact-section {
+                padding: 50px 15px;
+            }
+
+            .contact-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .contact-section > p {
+                font-size: 0.9rem;
+                margin-bottom: 30px;
+            }
+
+            .contact-form {
+                padding: 25px 15px;
+            }
+
+            .form-group label {
+                font-size: 0.85rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.8rem;
+            }
+
+            .newsletter {
+                margin: 0 15px 30px;
+                padding: 30px 15px;
+            }
+
+            .newsletter h3 {
+                font-size: 1.1rem;
+            }
+
+            .newsletter-form {
+                width: 100%;
+            }
+
+            .newsletter-form input {
+                min-width: 100%;
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            footer {
+                padding: 30px 15px;
+            }
+
+            footer nav ul {
+                gap: 8px 15px;
+                margin-bottom: 20px;
+            }
+
+            footer nav a {
+                font-size: 0.75rem;
+            }
+
+            .footer-links {
+                font-size: 0.75rem;
+            }
+
+            .footer-links span {
+                margin: 0 5px;
+            }
+
+            .copyright {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .site-title {
+                font-size: 1.4rem;
+            }
+
+            nav ul {
+                gap: 6px 12px;
+            }
+
+            nav a {
+                font-size: 0.65rem;
+            }
+
+            .page-hero h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Mark Ross Junkans</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Get in Touch</h1>
+        <p class="subtitle">I'd love to hear from you</p>
+        <p>Whether you have a question about my books, want to discuss a speaking engagement, or just want to say hello, feel free to reach out using the form below.</p>
+    </section>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <div class="quick-links-grid">
+            <a href="speaking.html" class="quick-link-card">
+                <div class="quick-link-icon">🎤</div>
+                <h3>Speaking & Media</h3>
+                <p>Book Mark for a keynote, podcast, church event, or media appearance</p>
+            </a>
+            <a href="bulk-orders.html" class="quick-link-card">
+                <div class="quick-link-icon">📦</div>
+                <h3>Bulk Orders</h3>
+                <p>Ordering for a church, book club, or organization? Get group discounts</p>
+            </a>
+            <a href="https://www.amazon.com/stores/Mark-Ross-Junkans/author/B0GCXX63WC" target="_blank" class="quick-link-card">
+                <div class="quick-link-icon">📚</div>
+                <h3>Find My Books</h3>
+                <p>Browse all titles on Amazon</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section">
+        <h2>Send a Message</h2>
+        <p>Fill out the form below and I'll get back to you as soon as I can.</p>
+        <form class="contact-form" action="https://formspree.io/f/xwvvlzjo" method="POST">
+            <input type="hidden" name="_subject" value="New Contact Form Message">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                    <option value="general">General question</option>
+                    <option value="book_feedback">Book feedback or review</option>
+                    <option value="speaking">Speaking inquiry</option>
+                    <option value="media">Media / Press</option>
+                    <option value="bulk_order">Bulk order question</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="What would you like to talk about?" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+            <p id="contact-form-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); display: none;"></p>
+        </form>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h3>Stay Connected with Mark's Latest Work</h3>
+            <form class="newsletter-form" action="https://formspree.io/f/xwvvlzjo" method="POST">
+                <input type="email" name="email" placeholder="Your email address" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p id="newsletter-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); display: none;"></p>
+        </div>
+    </section>
+
+    <script>
+        // Contact form handler
+        const contactForm = document.querySelector('.contact-form');
+        const contactStatus = document.getElementById('contact-form-status');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(contactForm);
+            const backupData = new FormData(contactForm);
+            contactStatus.textContent = 'Sending your message...';
+            contactStatus.style.display = 'block';
+
+            // Send to Formspree backup in parallel (fire and forget)
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: backupData,
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
+
+            try {
+                // Send to CRM
+                const res = await fetch('https://mrj-crm.vercel.app/api/inquiries', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: fd.get('name'),
+                        email: fd.get('email'),
+                        subject: fd.get('subject'),
+                        inquiry_type: 'general_contact',
+                        message: fd.get('message'),
+                    }),
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    contactStatus.textContent = 'Thank you! Your message has been sent. I\'ll be in touch soon.';
+                    contactStatus.style.color = '#16a34a';
+                    contactForm.reset();
+                } else {
+                    contactStatus.textContent = 'Oops! There was a problem. Please try again.';
+                    contactStatus.style.color = '#dc2626';
+                }
+            } catch (err) {
+                contactStatus.textContent = 'Oops! There was a problem. Please try again.';
+                contactStatus.style.color = '#dc2626';
+            }
+        });
+
+        // Newsletter form handler
+        const newsletterForm = document.querySelector('.newsletter-form');
+        const newsletterStatus = document.getElementById('newsletter-status');
+
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            const backupData = new FormData(newsletterForm);
+            newsletterStatus.textContent = 'Subscribing...';
+            newsletterStatus.style.display = 'block';
+
+            // Send to Formspree backup in parallel (fire and forget)
+            fetch(newsletterForm.action, {
+                method: 'POST',
+                body: backupData,
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
+
+            try {
+                // Send to CRM
+                const res = await fetch('https://mrj-crm.vercel.app/api/subscribers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    newsletterStatus.textContent = result.message || 'Thank you for subscribing!';
+                    newsletterStatus.style.color = '#16a34a';
+                    newsletterForm.reset();
+                } else {
+                    newsletterStatus.textContent = 'Oops! There was a problem. Please try again.';
+                    newsletterStatus.style.color = '#dc2626';
+                }
+            } catch (err) {
+                newsletterStatus.textContent = 'Oops! There was a problem. Please try again.';
+                newsletterStatus.style.color = '#dc2626';
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books">Books</a></li>
+                <li><a href="index.html#about">About Mark</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <span>|</span>
+            <a href="#">Terms of Use</a>
+            <span>|</span>
+            <a href="contact.html">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 Mark Ross Junkans. All rights reserved.</p>
+    </footer>
+</body>
+</html>
