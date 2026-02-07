@@ -836,27 +836,55 @@
 
         speakingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const data = new FormData(speakingForm);
+            const fd = new FormData(speakingForm);
+            speakingStatus.textContent = 'Submitting your request...';
+            speakingStatus.style.display = 'block';
 
             try {
-                const response = await fetch(speakingForm.action, {
+                // Send to CRM
+                const res = await fetch('https://mrj-crm.vercel.app/api/inquiries', {
                     method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: fd.get('name'),
+                        email: fd.get('email'),
+                        organization: fd.get('organization'),
+                        inquiry_type: 'speaking_request',
+                        subject: fd.get('type') || 'Speaking Request',
+                        message: fd.get('details') || 'Speaking request submitted via website',
+                        event_date: fd.get('date') || null,
+                        audience_size: fd.get('audience') || null,
+                        topic_requested: fd.get('type') || null,
+                        metadata: {
+                            format: fd.get('format') || null,
+                            request_type: fd.get('type') || null,
+                            audience_size: fd.get('audience') || null,
+                        },
+                    }),
                 });
+                const result = await res.json();
 
-                if (response.ok) {
+                if (result.success) {
                     speakingStatus.textContent = 'Thank you! Your request has been submitted. We\'ll be in touch soon.';
-                    speakingStatus.style.display = 'block';
+                    speakingStatus.style.color = '#16a34a';
                     speakingForm.reset();
                 } else {
                     speakingStatus.textContent = 'Oops! There was a problem. Please try again.';
-                    speakingStatus.style.display = 'block';
+                    speakingStatus.style.color = '#dc2626';
                 }
-            } catch (error) {
+            } catch (err) {
                 speakingStatus.textContent = 'Oops! There was a problem. Please try again.';
-                speakingStatus.style.display = 'block';
+                speakingStatus.style.color = '#dc2626';
             }
+
+            // Also send to Formspree as backup
+            try {
+                await fetch(speakingForm.action, {
+                    method: 'POST',
+                    body: new FormData(speakingForm),
+                    headers: { 'Accept': 'application/json' },
+                });
+            } catch (e) { /* silent backup */ }
         });
     </script>
 

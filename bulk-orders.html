@@ -907,27 +907,51 @@
 
         bulkForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const data = new FormData(bulkForm);
+            const fd = new FormData(bulkForm);
+            bulkStatus.textContent = 'Submitting your request...';
+            bulkStatus.style.display = 'block';
 
             try {
-                const response = await fetch(bulkForm.action, {
+                // Send to CRM
+                const res = await fetch('https://mrj-crm.vercel.app/api/inquiries', {
                     method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: fd.get('name'),
+                        email: fd.get('email'),
+                        organization: fd.get('organization'),
+                        inquiry_type: 'bulk_order',
+                        subject: 'Bulk order: ' + (fd.get('quantity') || '') + ' copies',
+                        message: fd.get('usage') || 'Bulk order inquiry submitted via website',
+                        metadata: {
+                            quantity: fd.get('quantity') || null,
+                            timeline: fd.get('timeline') || null,
+                        },
+                    }),
                 });
+                const result = await res.json();
 
-                if (response.ok) {
+                if (result.success) {
                     bulkStatus.textContent = 'Thank you! Your request has been submitted. We\'ll be in touch soon with a quote.';
-                    bulkStatus.style.display = 'block';
+                    bulkStatus.style.color = '#16a34a';
                     bulkForm.reset();
                 } else {
                     bulkStatus.textContent = 'Oops! There was a problem. Please try again.';
-                    bulkStatus.style.display = 'block';
+                    bulkStatus.style.color = '#dc2626';
                 }
-            } catch (error) {
+            } catch (err) {
                 bulkStatus.textContent = 'Oops! There was a problem. Please try again.';
-                bulkStatus.style.display = 'block';
+                bulkStatus.style.color = '#dc2626';
             }
+
+            // Also send to Formspree as backup
+            try {
+                await fetch(bulkForm.action, {
+                    method: 'POST',
+                    body: new FormData(bulkForm),
+                    headers: { 'Accept': 'application/json' },
+                });
+            } catch (e) { /* silent backup */ }
         });
     </script>
 

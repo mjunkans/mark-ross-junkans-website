@@ -861,27 +861,40 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const data = new FormData(form);
+            const email = form.querySelector('input[type="email"]').value;
+            status.textContent = 'Subscribing...';
+            status.style.display = 'block';
 
             try {
-                const response = await fetch(form.action, {
+                // Send to CRM
+                const res = await fetch('https://mrj-crm.vercel.app/api/subscribers', {
                     method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
                 });
+                const result = await res.json();
 
-                if (response.ok) {
-                    status.textContent = 'Thank you for subscribing!';
-                    status.style.display = 'block';
+                if (result.success) {
+                    status.textContent = result.message || 'Thank you for subscribing!';
+                    status.style.color = '#16a34a';
                     form.reset();
                 } else {
                     status.textContent = 'Oops! There was a problem. Please try again.';
-                    status.style.display = 'block';
+                    status.style.color = '#dc2626';
                 }
-            } catch (error) {
+            } catch (err) {
                 status.textContent = 'Oops! There was a problem. Please try again.';
-                status.style.display = 'block';
+                status.style.color = '#dc2626';
             }
+
+            // Also send to Formspree as backup
+            try {
+                await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' },
+                });
+            } catch (e) { /* silent backup */ }
         });
     </script>
 
