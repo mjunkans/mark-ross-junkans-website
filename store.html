@@ -230,14 +230,42 @@
     <script>
         const form = document.querySelector('.newsletter-form');
         const status = document.getElementById('form-status');
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const data = new FormData(form);
+            const email = form.querySelector('input[type="email"]').value;
+            const backupData = new FormData(form);
+            status.textContent = 'Subscribing...';
+            status.style.display = 'block';
+
+            // Send to Formspree backup in parallel (fire and forget)
+            fetch(form.action, {
+                method: 'POST',
+                body: backupData,
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
+
             try {
-                const response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-                if (response.ok) { status.textContent = 'Thank you for subscribing!'; status.style.display = 'block'; form.reset(); }
-                else { status.textContent = 'Oops! There was a problem. Please try again.'; status.style.display = 'block'; }
-            } catch (error) { status.textContent = 'Oops! There was a problem. Please try again.'; status.style.display = 'block'; }
+                // Send to CRM
+                const res = await fetch('https://mrj-crm.vercel.app/api/subscribers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    status.textContent = result.message || 'Thank you for subscribing!';
+                    status.style.color = '#16a34a';
+                    form.reset();
+                } else {
+                    status.textContent = 'Oops! There was a problem. Please try again.';
+                    status.style.color = '#dc2626';
+                }
+            } catch (err) {
+                status.textContent = 'Oops! There was a problem. Please try again.';
+                status.style.color = '#dc2626';
+            }
         });
     </script>
 
